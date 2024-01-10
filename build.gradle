@@ -47,7 +47,7 @@ dependencies {
 }
 
 task uberJar(type: Jar) {
-	archiveBaseName.set("frd_bhv")
+	archiveBaseName.set("hbase_test")
 	manifest {
 		attributes	'Implementation-Title': 'Exemplo de envio e recebimento de arquivo binários para o HBase',
 					'Built-Date': System.currentTimeMillis(),
