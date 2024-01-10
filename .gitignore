@@ -3,3 +3,22 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+/.idea/.gitignore
+/.gradle/buildOutputCleanup/buildOutputCleanup.lock
+/.gradle/buildOutputCleanup/cache.properties
+/.gradle/8.4/checksums/checksums.lock
+/.gradle/8.4/dependencies-accessors/dependencies-accessors.lock
+/.gradle/8.4/executionHistory/executionHistory.bin
+/.gradle/8.4/executionHistory/executionHistory.lock
+/.gradle/file-system.probe
+/.gradle/8.4/fileHashes/fileHashes.bin
+/.gradle/8.4/fileHashes/fileHashes.lock
+/.gradle/8.4/dependencies-accessors/gc.properties
+/.gradle/8.4/gc.properties
+/.gradle/vcs-1/gc.properties
+/gradle/wrapper/gradle-wrapper.jar
+/gradle/wrapper/gradle-wrapper.properties
+/gradlew
+/gradlew.bat
+/.gradle/8.4/fileChanges/last-build.bin
+/.gradle/buildOutputCleanup/outputFiles.bin

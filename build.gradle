@@ -1,0 +1,65 @@
+//version '1.0'
+
+group = 'teste_hbase'
+buildDir = "/tmp/build/$group"
+
+apply plugin: 'scala'
+apply plugin: 'java'
+apply plugin: 'idea'
+
+idea {
+	module {
+		inheritOutputDirs = true
+		downloadJavadoc = false
+		downloadSources = false
+	}
+}
+
+compileJava {
+	options.release = 11
+}
+
+def scalaVersion = '2.12.18'
+def scalaRelease = scalaVersion.split('\\.').take(2).join('.')
+
+repositories {
+	mavenCentral()
+	maven {url "https://repository.cloudera.com/artifactory/cloudera-repos/"}
+}
+
+def deploy = false
+
+dependencies {
+	if (deploy) {
+		compileOnly "org.scala-lang:scala-library:$scalaVersion"
+		compileOnly group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.13.4'
+		compileOnly group: 'com.fasterxml.jackson.module', name: "jackson-module-scala_$scalaRelease", version: '2.13.4'
+		compileOnly group: 'org.apache.hbase', name: 'hbase-client', version: '2.2.7'
+		compileOnly group: 'org.apache.kafka', name: 'kafka-clients', version: '2.5.1'
+	} else {
+		implementation "org.scala-lang:scala-library:$scalaVersion"
+		implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.13.4'
+		implementation group: 'com.fasterxml.jackson.module', name: "jackson-module-scala_$scalaRelease", version: '2.13.4'
+		implementation group: 'org.apache.hbase', name: 'hbase-client', version: '2.2.7'
+		implementation group: 'org.apache.kafka', name: 'kafka-clients', version: '2.5.1'
+	}
+
+}
+
+task uberJar(type: Jar) {
+	archiveBaseName.set("frd_bhv")
+	manifest {
+		attributes	'Implementation-Title': 'Exemplo de envio e recebimento de arquivo binários para o HBase',
+					'Built-Date': System.currentTimeMillis(),
+					'Java-JDK': System.getProperty('java.version'),
+					'Java-Vendor': System.getProperty('java.vm.vendor'),
+					'Scala-SDK': scalaVersion,
+					'UUID': UUID.randomUUID().toString().toUpperCase()
+	}
+	from sourceSets.main.output
+	dependsOn configurations.runtimeClasspath
+	from {
+		configurations.runtimeClasspath.findAll { it.name.endsWith('jar') }.collect { zipTree(it) }
+	}
+	eachFile { it.duplicatesStrategy = DuplicatesStrategy.EXCLUDE }
+}
