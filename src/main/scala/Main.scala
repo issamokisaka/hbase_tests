@@ -27,14 +27,14 @@ object Main {
     val tableName = "big.hb_binary_files"
     val table = connection.getTable(TableName.valueOf(tableName))
     val put = new Put(Bytes.toBytes("1"))
-    val fileContent = Files.readAllBytes(Paths.get("/home/issamo/Documents/regras_modelos_para_fontes_cluster_5_1.0/TesteHbase/sun.png"))
+    val fileContent = Files.readAllBytes(Paths.get("sun.png"))
     put.addColumn(Bytes.toBytes("f"), Bytes.toBytes("binary_data"), fileContent)
 
     table.put(put)
   }
 
   private def getFile(connection: Connection): Unit = {
-    val tableName = "big.hb_binary_files"
+    val tableName = "base.hb_binary_files"
     val table = connection.getTable(TableName.valueOf(tableName))
     val get = new Get(Bytes.toBytes("1"))
     val result = table.get(get)
@@ -44,7 +44,7 @@ object Main {
   }
 
   def main(args: Array[String]): Unit = {
-    val zookeeper = "pxl1big00133,pxl1big00134,pxl1big00140"
+    val zookeeper = "serv01,serv02,serv03"
     val hbconf = HBaseConfiguration.create()
     hbconf.set("hbase.zookeeper.quorum", zookeeper)
     val connection = ConnectionFactory.createConnection(hbconf)

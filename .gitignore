@@ -22,3 +22,11 @@ hs_err_pid*
 /gradlew.bat
 /.gradle/8.4/fileChanges/last-build.bin
 /.gradle/buildOutputCleanup/outputFiles.bin
+/.idea/codeStyles/codeStyleConfig.xml
+/.idea/compiler.xml
+/.idea/gradle.xml
+/.idea/jarRepositories.xml
+/.idea/misc.xml
+/.idea/codeStyles/Project.xml
+/.idea/scala_compiler.xml
+/.idea/vcs.xml
